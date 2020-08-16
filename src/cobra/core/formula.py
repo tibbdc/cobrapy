@@ -217,3 +217,7 @@ elements_and_molecular_weights = {
     "Uuq": 289.000000,
     "Uuh": 292.000000,
 }
+
+element_reduction_degrees = {
+    'C':4,'H':1,'O':-2,'N':-3,'S':-2,'P':5,'Fe':3,'Ca':2,'Na':1,'Mg':2,
+}

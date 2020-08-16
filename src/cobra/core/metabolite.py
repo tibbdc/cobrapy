@@ -10,7 +10,7 @@ from warnings import warn
 from future.utils import raise_from, raise_with_traceback
 from six import iteritems
 
-from cobra.core.formula import elements_and_molecular_weights
+from cobra.core.formula import elements_and_molecular_weights, element_reduction_degrees
 from cobra.core.species import Species
 from cobra.exceptions import OptimizationError
 from cobra.util.solver import check_solver_status
@@ -134,6 +134,19 @@ class Metabolite(Species):
             )
         except KeyError as e:
             warn("The element %s does not appear in the periodic table" % e)
+
+    @property
+    def reduction_degree(self):
+        """Calculate the reduction degree"""
+        try:
+            return sum(
+                [
+                    count * element_reduction_degrees[element]
+                    for element, count in self.elements.items()
+                ]
+            )
+        except KeyError as e:
+            warn("The element %s does not appear in the degree table" % e)
 
     @property
     def y(self):
